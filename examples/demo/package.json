@@ -30,7 +30,7 @@
     },
     "scripts": {
         "analyze": "source-map-explorer 'build/static/js/*.js'",
-        "start": "react-scripts start",
+        "start": "react-app-rewired start",
         "build": "react-scripts build",
         "eject": "react-scripts eject"
     },
@@ -42,6 +42,8 @@
         "not op_mini all"
     ],
     "devDependencies": {
+        "@babel/preset-env": "^7.1.0",
+        "@babel/preset-react": "^7.0.0",
         "@types/classnames": "^2.2.9",
         "@types/jest": "^24.0.23",
         "@types/node": "^12.12.14",
@@ -49,6 +51,7 @@
         "@types/react": "^16.9.13",
         "@types/react-dom": "^16.9.4",
         "source-map-explorer": "^2.0.0",
-        "typescript": "^3.7.2"
+        "typescript": "^3.7.2",
+        "react-app-rewired": "^2.1.5"
     }
 }
