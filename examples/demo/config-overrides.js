@@ -45,22 +45,45 @@ const alias = {
     ),
 };
 
+const additionalInclude = Object.values(alias);
+
+const augmentInclude = ({ include, ...rest }) => {
+    if (!include) {
+        return rest;
+    }
+    return {
+        ...rest,
+        include: additionalInclude.concat(include),
+    };
+};
+
+// Augment webpack rule so that packages files are compiled too
+const augmentRule = ({ oneOf, include, ...rest }) => {
+    if (!oneOf && !include) {
+        return rest;
+    }
+    return {
+        ...rest,
+        include: include ? additionalInclude.concat(include) : undefined,
+        oneOf: oneOf ? oneOf.map(augmentInclude) : undefined,
+    };
+};
+
 module.exports = config => {
     if (process.env.NODE_ENV !== 'development') {
         return config;
     }
 
-    config.module.rules[2].oneOf[1].include = Object.values(alias).concat(
-        config.module.rules[2].oneOf[1].include
-    );
-    config.module.rules[1].include = Object.values(alias).concat(
-        config.module.rules[1].include
-    );
-
+    // Remove restriction on file outside of src files
     config.resolve.plugins = config.resolve.plugins.filter(
         plugin => !(plugin instanceof ModuleScopePlugin)
     );
 
+    config.module.rules = config.module.rules.map(augmentRule);
+
+    // prevent error with graphql
+    // see https://github.com/graphql/graphql-js/issues/1272#issuecomment-393903706
+    // TODO remove once graphql updated in ra-data-graphql-simple
     config.module.rules.unshift({
         test: /\.mjs$/,
         include: /node_modules/,
