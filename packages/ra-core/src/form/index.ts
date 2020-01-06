@@ -2,26 +2,22 @@ import addField from './addField';
 import FormDataConsumer from './FormDataConsumer';
 import FormField from './FormField';
 import FormWithRedirect from './FormWithRedirect';
-import useInput, { InputProps } from './useInput';
+import useInput from './useInput';
 import ValidationError from './ValidationError';
 import useInitializeFormWithRecord from './useInitializeFormWithRecord';
 import sanitizeEmptyValues from './sanitizeEmptyValues';
-import useChoices, {
-    ChoicesProps,
-    OptionTextElement,
-    OptionText,
-} from './useChoices';
+import useChoices from './useChoices';
 import useSuggestions from './useSuggestions';
+
+export * from './useInput';
+
+export * from './useChoices';
 
 export {
     addField,
-    ChoicesProps,
     FormDataConsumer,
     FormField,
     FormWithRedirect,
-    InputProps,
-    OptionTextElement,
-    OptionText,
     sanitizeEmptyValues,
     useChoices,
     useInput,
