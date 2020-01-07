@@ -74,9 +74,12 @@ module.exports = config => {
         return config;
     }
 
-    // Remove restriction on file outside of src files
+    // Remove restriction for external packages
     config.resolve.plugins = config.resolve.plugins.filter(
         plugin => !(plugin instanceof ModuleScopePlugin)
+    );
+    config.resolve.plugins.push(
+        new ModuleScopePlugin(__dirname, additionalInclude)
     );
 
     config.module.rules = config.module.rules.map(augmentRule);
