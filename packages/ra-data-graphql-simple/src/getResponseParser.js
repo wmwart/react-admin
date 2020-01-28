@@ -31,7 +31,7 @@ const sanitizeResource = data => {
                     dataKey.id && {
                         [`${key}.id`]: dataKey.id,
                     }),
-                [key]: sanitizeResource(dataKey),
+                [key]: (dataKey.__typename) ? sanitizeResource(dataKey) : dataKey, 
             };
         }
 
