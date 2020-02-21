@@ -67,6 +67,7 @@ const BulkActionsToolbar = ({
                     {translate(label, {
                         _: label,
                         smart_count: selectedIds.length,
+                        count: selectedIds.length,
                     })}
                 </Typography>
             </div>
