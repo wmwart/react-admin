@@ -40,6 +40,7 @@ export default options => {
                     return Promise.all(
                         ids.map(id =>
                             defaultDataProvider(UPDATE, resource, {
+                                id,
                                 data: {
                                     id,
                                     ...data,
